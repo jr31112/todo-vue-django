@@ -5,7 +5,7 @@
       to : router/index.js에 있는 routers 중에 path 값
       -> routes에 정의된 해당 컴포넌트를 불러준다 -->
       <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view/>
   </div>

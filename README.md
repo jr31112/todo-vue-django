@@ -204,8 +204,8 @@ $ pip install djangorestframework-jwt
    import jwtDecode from 'jwt-decode'
    this.$session.start()
    const token = this.$session.get('jwt')
-         console.log(jwtDecode(token))
-   
+   console.log(jwtDecode(token))
    ```
 
-   
+## 7. User별 Todo
+

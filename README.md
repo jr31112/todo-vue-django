@@ -169,9 +169,43 @@ $ pip install djangorestframework-jwt
 
    3. `vue-session` 활용하여 저장
 
-      ```vue
+      ```js
       this.$session.start()
       this.$session.set('jwt', token)
       ```
 
-      
+### 3) 활용
+
+1. axios 요청시마다 아래의 `options`을 포함하여 전송
+
+   ```js
+   this.$session.start()
+   const token = this.$session.get('jwt')
+   const options = {
+       headers: {
+           Authorization : `JWT ${token}` // JWT 뒤 공백 있음
+       }
+   }
+   ```
+
+### 4) 사용자 정보 활용
+
+> 사용자 정보를 활용하고 싶다면, token을 디코딩하여 활용한다.
+
+1. 패키지 설치
+
+   ```bash
+   $ npm i jwt-decode
+   ```
+
+2. 활용
+
+   ```js
+   import jwtDecode from 'jwt-decode'
+   this.$session.start()
+   const token = this.$session.get('jwt')
+         console.log(jwtDecode(token))
+   
+   ```
+
+   

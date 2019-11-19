@@ -9,6 +9,8 @@
 // @ is an alias to /src
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import router from '../router'
+
 import TodoList from '@/components/TodoList.vue'
 import TodoForm from '@/components/TodoForm.vue'
 
@@ -60,19 +62,26 @@ export default {
         }
       }
       
-      axios.get('http://127.0.0.1:8000/api/v1/todos/', options)
+      axios.get(`http://127.0.0.1:8000/api/v1/users/${jwtDecode(token).user_id}/`, options)
     .then(response => {
       
       console.log(response) // 만약, 오류가 발생하게 되면 ESLint 설정을 package.json에 추가
-      this.todos = response.data
+      this.todos = response.data.todo_set
     })
     .catch(error => {
       console.log(error)
     })
     
+    },
+    isLogin(){
+      this.$session.start()
+      if (!this.$session.has('jwt')) {
+        router.push('/login')
+      }
     }
   },
   mounted(){
+    this.isLogin()
     this.getTodos()
   }
     

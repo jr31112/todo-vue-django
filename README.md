@@ -209,3 +209,9 @@ $ pip install djangorestframework-jwt
 
 ## 7. User별 Todo
 
+### 1) Django
+
+### 2) Vue
+
+## 8. 비로그인시 로그인 페이지로 이동
+

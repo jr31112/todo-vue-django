@@ -28,6 +28,6 @@ def todo_index_create(request):
 def user_detail(request, id):
     User = get_user_model()
     user = get_object_or_404(User, pk=id)
-    serializers = UserSerializers(User)
-    return Response(serializers)
+    serializers = UserSerializers(user)
+    return Response(serializers.data)
 

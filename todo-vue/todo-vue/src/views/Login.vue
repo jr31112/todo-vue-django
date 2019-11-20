@@ -28,9 +28,10 @@ export default {
       axios.post('http://127.0.0.1:8000/api-token-auth/', formData)
       .then(response => {
         const token = response.data.token
-        console.log(response.data.token)
         this.$session.start()
         this.$session.set('jwt', token)
+        // vuex actions 호출 -> dispatch
+        this.$store.dispatch('login', token)
         router.push('/')
       })
       .catch(error => {

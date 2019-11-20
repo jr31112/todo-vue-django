@@ -13,25 +13,25 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
+
 export default {
   name : 'TodoList',
   props : {
-    //
     todos : {
       type: Array,
       required: true
     }
   },
+  computed: {
+    ... mapGetters([
+      'options',
+      'user'
+    ])
+  },
   methods : {
     deleteTodo(todo){
-      this.$session.start()
-      const token = this.$session.get('jwt')
-      const options = {
-        headers: {
-          Authorization : `JWT ${token}` // JWT 뒤 공백 있음
-        }
-      }
-      axios.delete(`http://127.0.0.1:8000/api/v1/todos/${todo.id}/`,options)
+      axios.delete(`http://127.0.0.1:8000/api/v1/todos/${todo.id}/`, this.options)
       .then(Response=>{
         console.log(Response)
         // const target = this.todos.find(el => {
@@ -47,14 +47,7 @@ export default {
     })
     },
     clickCheck(todo){
-      this.$session.start()
-      const token = this.$session.get('jwt')
-      const options = {
-        headers: {
-          Authorization : `JWT ${token}` // JWT 뒤 공백 있음
-        }
-      }
-      axios.put(`http://127.0.0.1:8000/api/v1/todos/${todo.id}/`, todo, options)
+      axios.put(`http://127.0.0.1:8000/api/v1/todos/${todo.id}/`, todo, this.options)
       .then(Response =>{
         console.log(Response)
       })
